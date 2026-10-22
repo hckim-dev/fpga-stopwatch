@@ -89,4 +89,4 @@ Vivado 2026.1, Basys3 `xc7a35tcpg236-1`, 100 MHz 기준으로 다른 경로의 �
 source [file join [get_property DIRECTORY [current_project]] scripts register_sources.tcl]
 ```
 
-PNG는 PPT 삽입용이며, [FSM SVG](assets/fsm.svg)와 [블록도 SVG](assets/function_block_diagram.svg)는 확대·편집용 원본입니다.
+PPT 삽입용 자료는 `assets/`의 FSM 및 타이밍 차트 PNG입니다.

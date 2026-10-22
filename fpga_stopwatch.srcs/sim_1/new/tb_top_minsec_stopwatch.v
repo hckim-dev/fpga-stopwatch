@@ -184,10 +184,10 @@ module tb_top_minsec_stopwatch;
     cycles(1300);
     press(4);
     if (led !== 4) $fatal(1, "pause mode");
-    saved_ms = dut.u_minsec_stopwatch.u_stopwatch_counter.r_ms_count;
+    saved_ms = dut.u_minsec_stopwatch.u_stopwatch_counter.r_ms_divider;
     saved_clock = dut.u_minsec_stopwatch.w_clock_data;
     cycles(4200);
-    if (dut.u_minsec_stopwatch.u_stopwatch_counter.r_ms_count !== saved_ms)
+    if (dut.u_minsec_stopwatch.u_stopwatch_counter.r_ms_divider !== saved_ms)
       $fatal(1, "paused stopwatch changed");
     if (dut.u_minsec_stopwatch.w_clock_data == saved_clock) $fatal(1, "background clock stopped");
     press(2);
@@ -195,12 +195,13 @@ module tb_top_minsec_stopwatch;
     press(4);
     cycles(4050);
     press(4);
-    if (led !== 4 || dut.w_display_data !== 1) $fatal(1, "stopwatch second");
+    if (led !== 4 || dut.w_display_data < 100 || dut.w_display_data > 102)
+      $fatal(1, "stopwatch SS.hh display");
     press(1);
     if (led !== 1) $fatal(1, "return clock");
-    saved_ms = dut.u_minsec_stopwatch.u_stopwatch_counter.r_ms_count;
+    saved_ms = dut.u_minsec_stopwatch.u_stopwatch_counter.r_ms_divider;
     cycles(100);
-    if (dut.u_minsec_stopwatch.u_stopwatch_counter.r_ms_count !== saved_ms)
+    if (dut.u_minsec_stopwatch.u_stopwatch_counter.r_ms_divider !== saved_ms)
       $fatal(1, "clock mode stopwatch changed");
     press(1);
     if (led !== 2) $fatal(1, "reenter stopwatch run");

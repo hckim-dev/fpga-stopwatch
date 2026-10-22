@@ -68,14 +68,13 @@ module minsec_stopwatch (
       .display_data(w_clock_data)
   );
 
-  // 시계 모드 및 일시정지 상태의 스톱워치 값 보존
-  minsec_counter u_stopwatch_counter (
+  // 스톱워치는 10 ms 단위로 SS.hh 형식 계수
+  stopwatch_counter u_stopwatch_counter (
       .clk(clk),
       .reset(reset),
       .tick_1ms(tick_1ms),
       .enable(w_stopwatch_enable),
       .clear(w_stopwatch_clear),
-      .dot_on(),
       .display_data(w_stopwatch_data)
   );
 

@@ -1,6 +1,6 @@
 # FPGA Stopwatch
 
-Basys3 보드와 Verilog로 구현한 분초 시계 및 스톱워치 학습 프로젝트입니다. 분초 시계는 `MM.SS` 형식으로 표시하고, 스톱워치는 실행·일시정지·초기화를 지원합니다. 일시정지 후 5초 동안 조작이 없으면 FND에 원형 애니메이션이 나타납니다.
+Basys3 보드와 Verilog로 구현한 분초 시계 및 스톱워치 학습 프로젝트입니다. 분초 시계는 `MM.SS`, 스톱워치는 10 ms 해상도의 `SS.hh` 형식으로 표시합니다. 스톱워치는 실행·일시정지·초기화를 지원하며, 일시정지 후 5초 동안 조작이 없으면 FND에 원형 애니메이션이 나타납니다.
 
 > 학습 프로젝트이며, RTL 작성과 검토 과정에서 AI 도구를 보조적으로 사용했습니다. 주요 동작은 Vivado 시뮬레이션으로 확인했습니다.
 
@@ -8,7 +8,7 @@ Basys3 보드와 Verilog로 구현한 분초 시계 및 스톱워치 학습 프�
 
 - Basys3 100 MHz 입력 클럭에서 1 ms tick 생성
 - 분초 시계: 59:59 다음 00:00 순환, Dot 1 Hz 점멸
-- 스톱워치: 1 ms 내부 계수, MM.SS 표시, 일시정지 시 소수 시간 보존
+- 스톱워치: 10 ms 해상도, SS.hh 표시, 99.99초에서 00.00초 순환
 - 일시정지 후 5초 무입력 시 6개 FND 바깥 선분 원형 애니메이션
 - 버튼 디바운스 완료 후 애니메이션 종료 및 버튼 기능 수행
 - 버튼 2단 동기화, 디바운스, 상승 에지 검출
@@ -20,7 +20,7 @@ Basys3 보드와 Verilog로 구현한 분초 시계 및 스톱워치 학습 프�
 |---|---|
 | SW15 | 전체 리셋 |
 | 왼쪽 버튼 `btn[0]` | 분초 시계와 스톱워치 전환 |
-| 가운데 버튼 `btn[1]` | 스톱워치 00:00 초기화, 일시정지 상태 유지 |
+| 가운데 버튼 `btn[1]` | 스톱워치 00.00 초기화, 일시정지 상태 유지 |
 | 오른쪽 버튼 `btn[2]` | 스톱워치 일시정지와 재개 |
 
 LED[0]은 분초 시계, LED[1]은 스톱워치 실행, LED[2]는 일시정지 상태를 표시합니다. 분초 시계는 스톱워치 화면에서도 계속 진행합니다.
@@ -47,7 +47,7 @@ top_minsec_stopwatch
 
 1. Vivado 2026.1에서 `fpga_stopwatch.xpr`을 엽니다.
 2. Design Sources의 `top_minsec_stopwatch`를 합성 top으로 사용합니다.
-3. `tb_top_minsec_stopwatch`, `tb_fnd_idle_animation`, `tb_display_and_boundaries`를 각각 Simulation Top으로 선택해 Behavioral Simulation의 Run All을 실행합니다.
+3. `tb_top_minsec_stopwatch`, `tb_stopwatch_counter`, `tb_fnd_idle_animation`, `tb_display_and_boundaries`를 각각 Simulation Top으로 선택해 Behavioral Simulation의 Run All을 실행합니다.
 4. 구현 결과는 Basys3 `xc7a35tcpg236-1` 기준입니다.
 
 일괄 검증은 저장소 루트에서 아래 명령으로 실행할 수 있습니다.

@@ -116,11 +116,11 @@ module tb_fnd_idle_animation;
     cycles(21000);
     if (dut.w_animation_active !== 0) $fatal(1, "run mode animation");
     press(4);
-    saved_ms = dut.u_minsec_stopwatch.u_stopwatch_counter.r_ms_count;
+    saved_ms = dut.u_minsec_stopwatch.u_stopwatch_counter.r_ms_divider;
     cycles(21000);
     if (dut.w_animation_active !== 1 || seg !== dut.w_animation_seg)
       $fatal(1, "pause animation display");
-    if (dut.u_minsec_stopwatch.u_stopwatch_counter.r_ms_count !== saved_ms)
+    if (dut.u_minsec_stopwatch.u_stopwatch_counter.r_ms_divider !== saved_ms)
       $fatal(1, "animation changed time");
     // 가운데 버튼의 애니메이션 종료 및 초기화 동시 수행 검증
     press(2);

@@ -5,11 +5,11 @@ source $project_root/scripts/register_sources.tcl
 close_project
 open_project [file join $project_root fpga_stopwatch.xpr]
 set rtl_count [llength [get_files -of_objects [get_filesets sources_1] -filter {FILE_TYPE == Verilog}]]
-if {$rtl_count != 11} {error "Expected 11 RTL files, got $rtl_count"}
+if {$rtl_count != 12} {error "Expected 12 RTL files, got $rtl_count"}
 if {[llength [get_files -quiet */fnd_idle_animation.v]] != 1} {error "Animation module is not registered"}
 file mkdir $project_root/verification
 report_compile_order -used_in synthesis -file $project_root/verification/compile_order.rpt
-foreach test_top {tb_display_and_boundaries tb_fnd_idle_animation tb_top_minsec_stopwatch} {
+foreach test_top {tb_display_and_boundaries tb_fnd_idle_animation tb_stopwatch_counter tb_top_minsec_stopwatch} {
     set_property top $test_top [get_filesets sim_1]
     update_compile_order -fileset sim_1
     launch_simulation -simset sim_1 -mode behavioral

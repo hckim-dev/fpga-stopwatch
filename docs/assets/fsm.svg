@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="870" viewBox="0 0 1600 870">
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#17324D"/></marker></defs>
+<rect width="1600" height="870" fill="white"/>
+<style>text {font-family:"Malgun Gothic","Segoe UI",sans-serif;fill:#17324D} .line{fill:none;stroke:#17324D;stroke-width:3;marker-end:url(#arrow);stroke-linejoin:round}</style>
+<text x="80" y="65" font-size="27" text-anchor="start" font-weight="700" style="fill:#17324D">MODE CONTROLLER</text>
+<text x="80" y="108" font-size="23" text-anchor="start" font-weight="400" style="fill:#50647A">minsec_stopwatch · 3-state FSM</text>
+<rect x="140" y="340" width="300" height="170" rx="18" fill="#F1F5FA" stroke="#17324D" stroke-width="3"/>
+<text x="290.0" y="384" font-size="24" text-anchor="middle" font-weight="700" style="fill:#17324D">ClockMode</text>
+<text x="290.0" y="422" font-size="21" text-anchor="middle" font-weight="400" style="fill:#50647A">00 · 분초 시계</text>
+<text x="290.0" y="454" font-size="21" text-anchor="middle" font-weight="400" style="fill:#50647A">MM.SS · 백그라운드 계수</text>
+<rect x="650" y="340" width="330" height="170" rx="18" fill="#E9F6F4" stroke="#17324D" stroke-width="3"/>
+<text x="815.0" y="384" font-size="24" text-anchor="middle" font-weight="700" style="fill:#17324D">StopwatchRun</text>
+<text x="815.0" y="422" font-size="21" text-anchor="middle" font-weight="400" style="fill:#50647A">01 · 스톱워치 실행</text>
+<text x="815.0" y="454" font-size="21" text-anchor="middle" font-weight="400" style="fill:#50647A">SS.hh · 10 ms 해상도</text>
+<rect x="1190" y="340" width="330" height="170" rx="18" fill="#F1F5FA" stroke="#17324D" stroke-width="3"/>
+<text x="1355.0" y="384" font-size="24" text-anchor="middle" font-weight="700" style="fill:#17324D">StopwatchPause</text>
+<text x="1355.0" y="422" font-size="21" text-anchor="middle" font-weight="400" style="fill:#50647A">10 · 스톱워치 일시정지</text>
+<text x="1355.0" y="454" font-size="21" text-anchor="middle" font-weight="400" style="fill:#50647A">시간 및 부분 계수값 보존</text>
+<path class="line" d="M35 425 H140"/>
+<text x="35" y="400" font-size="20" text-anchor="start" font-weight="700" style="fill:#17324D">RESET</text>
+<path class="line" d="M440 415 H650"/>
+<text x="545" y="393" font-size="23" text-anchor="middle" font-weight="700" style="fill:#17324D">btn[0]</text>
+<path class="line" d="M690 340 C650 225 365 225 330 340"/>
+<text x="505" y="248" font-size="23" text-anchor="middle" font-weight="700" style="fill:#17324D">btn[0]</text>
+<path class="line" d="M980 410 H1190"/>
+<text x="1085" y="390" font-size="23" text-anchor="middle" font-weight="700" style="fill:#17324D">btn[2]</text>
+<path class="line" d="M1190 465 H980"/>
+<text x="1085" y="498" font-size="23" text-anchor="middle" font-weight="700" style="fill:#17324D">btn[2]</text>
+<path class="line" d="M745 340 C690 170 930 170 900 340"/>
+<text x="815" y="165" font-size="23" text-anchor="middle" font-weight="700" style="fill:#17324D">btn[1] / 00.00 초기화</text>
+<path class="line" d="M1270 340 C1215 170 1485 170 1450 340"/>
+<text x="1355" y="165" font-size="23" text-anchor="middle" font-weight="700" style="fill:#17324D">btn[1] / 00.00 초기화</text>
+<path class="line" d="M1360 510 C1360 680 290 680 290 510"/>
+<text x="810" y="676" font-size="23" text-anchor="middle" font-weight="700" style="fill:#17324D">btn[0]</text>
+<text x="800" y="732" font-size="23" text-anchor="middle" font-weight="400" style="fill:#17324D">입력은 디바운스 후 1클럭 펄스 · 동시 입력 우선순위: btn[0] &gt; btn[1] &gt; btn[2]</text>
+<text x="800" y="779" font-size="21" text-anchor="middle" font-weight="400" style="fill:#50647A">전역 RESET: 모든 상태 → ClockMode, 두 카운터 초기화 · 표시하지 않은 입력: 상태 유지</text>
+<text x="800" y="820" font-size="21" text-anchor="middle" font-weight="400" style="fill:#50647A">5초 무입력 애니메이션은 Pause 상태의 표시 기능이며 별도의 모드 전이 없음</text>
+</svg>

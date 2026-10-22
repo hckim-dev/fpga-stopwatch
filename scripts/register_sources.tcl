@@ -6,6 +6,14 @@ if {[current_project -quiet] eq ""} {
 } elseif {[file normalize [get_property DIRECTORY [current_project]]] ne $project_root} {
     error "A different project is open. Open $project_file first."
 }
+# Remove references left behind by renamed or deleted source files.
+foreach fileset {sources_1 sim_1 constrs_1} {
+    foreach source_file [get_files -of_objects [get_filesets $fileset]] {
+        if {![file exists [get_property NAME $source_file]]} {
+            remove_files $source_file
+        }
+    }
+}
 foreach source_file [lsort [glob $project_root/fpga_stopwatch.srcs/sources_1/new/*.v]] {
     if {[llength [get_files -quiet $source_file]] == 0} {
         add_files -fileset sources_1 -norecurse $source_file

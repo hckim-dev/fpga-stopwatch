@@ -43,7 +43,6 @@ module minsec_counter (
     end
   end
 
-  // 분초 값의 십진수 MMSS 변환
   // 기존 밀리초 카운터를 활용한 1 Hz 점멸 위상 생성
   assign dot_on = (r_ms_count < 500);
 

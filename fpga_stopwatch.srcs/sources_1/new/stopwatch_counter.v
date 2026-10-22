@@ -13,7 +13,7 @@ module stopwatch_counter (
   reg [6:0] r_centisecond;
   reg [6:0] r_second;
 
-  // Count ten 1 ms ticks per centisecond.
+  // 1 ms tick 10개를 누적해 1/100초 계수
   always @(posedge clk or posedge reset) begin
     if (reset) begin
       r_ms_divider  <= 0;
@@ -43,7 +43,7 @@ module stopwatch_counter (
     end
   end
 
-  // Convert seconds and centiseconds to SS.hh display data.
+  // 초와 1/100초를 SS.hh 표시 데이터로 변환
   assign display_data = r_second * 100 + r_centisecond;
 
 endmodule

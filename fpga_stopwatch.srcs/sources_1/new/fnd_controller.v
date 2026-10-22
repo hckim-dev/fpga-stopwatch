@@ -42,7 +42,7 @@ module fnd_controller (
       .an(an)
   );
 
-  // 분의 일의 자리 Dot 제어로 MM.SS 표시 구현 (active-low)
+  // 두 번째 자리 뒤 Dot으로 MM.SS / SS.hh 구분 (active-low)
   assign seg = {~(dot_on && (w_digit_sel == 2'd2)), w_seg[6:0]};
 
 endmodule

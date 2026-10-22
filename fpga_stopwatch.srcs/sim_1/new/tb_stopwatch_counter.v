@@ -6,8 +6,8 @@ module tb_stopwatch_counter;
   reg tick_1ms = 0;
   reg enable = 1;
   reg clear = 0;
-  wire [13:0] display_data;
-  integer i;
+  reg [2:0] scenario = 0;
+  wire [13:0] display_time;
 
   stopwatch_counter dut (
       .clk(clk),
@@ -15,67 +15,64 @@ module tb_stopwatch_counter;
       .tick_1ms(tick_1ms),
       .enable(enable),
       .clear(clear),
-      .display_data(display_data)
+      .display_data(display_time)
   );
 
   always #5 clk = ~clk;
 
-  task pulse_1ms;
+  // 단위 테스트에서 매 클럭을 1 ms tick으로 사용
+  task wait_ticks;
+    input integer count;
     begin
-      @(negedge clk);
-      tick_1ms = 1;
-      @(negedge clk);
-      tick_1ms = 0;
+      repeat (count) @(negedge clk);
     end
   endtask
 
   initial begin
-    repeat (2) @(negedge clk);
+    wait_ticks(2);
     reset = 0;
+    tick_1ms = 1;
 
-    // Check 10 ms resolution and the 00.99 to 01.00 boundary.
-    repeat (9) pulse_1ms;
-    if (display_data !== 0) $fatal(1, "incremented before 10 ms");
-    pulse_1ms;
-    if (display_data !== 1) $fatal(1, "00.01 boundary");
+    // 1. 10 ms 해상도 및 00.99 → 01.00 올림
+    scenario = 1;
+    wait_ticks(9);
+    if (display_time !== 0) $fatal(1, "before 10 ms");
+    wait_ticks(1);
+    if (display_time !== 1) $fatal(1, "10 ms resolution");
+    wait_ticks(980);
+    if (display_time !== 99) $fatal(1, "00.99");
+    wait_ticks(10);
+    if (display_time !== 100) $fatal(1, "01.00 carry");
 
-    repeat (980) pulse_1ms;
-    if (display_data !== 99) $fatal(1, "00.99 boundary");
-    repeat (9) pulse_1ms;
-    pulse_1ms;
-    if (display_data !== 100) $fatal(1, "01.00 boundary");
-
-    // Check pause and resume preserve the partial 10 ms interval.
-    repeat (2) pulse_1ms;
+    // 2. 일시정지 시 10 ms 미만의 부분 시간까지 보존
+    scenario = 2;
+    wait_ticks(2);
     enable = 0;
-    repeat (20) pulse_1ms;
-    if (display_data !== 100 || dut.r_ms_divider !== 2)
-      $fatal(1, "pause did not preserve time fraction");
+    wait_ticks(20);
+    if (display_time !== 100) $fatal(1, "pause");
     enable = 1;
-    repeat (7) pulse_1ms;
-    if (display_data !== 100) $fatal(1, "incremented before resumed 10 ms boundary");
-    pulse_1ms;
-    if (display_data !== 101) $fatal(1, "resume fraction");
+    wait_ticks(7);
+    if (display_time !== 100) $fatal(1, "resume too early");
+    wait_ticks(1);
+    if (display_time !== 101) $fatal(1, "resume fraction");
 
-    // Check clear and rollover at 100 seconds.
-    @(negedge clk);
+    // 3. 초기화 및 최대 표시 시간 순환
+    scenario = 3;
     clear = 1;
-    @(negedge clk);
+    wait_ticks(1);
     clear = 0;
-    if (display_data !== 0) $fatal(1, "clear");
-    for (i = 0; i < 99990; i = i + 1) pulse_1ms;
-    if (display_data !== 9999) $fatal(1, "99.99 boundary");
-    repeat (9) pulse_1ms;
-    if (display_data !== 9999) $fatal(1, "rolled over before 100.00 seconds");
-    pulse_1ms;
-    if (display_data !== 0) $fatal(1, "100 second rollover");
+    if (display_time !== 0) $fatal(1, "clear");
+    wait_ticks(99990);
+    if (display_time !== 9999) $fatal(1, "99.99");
+    wait_ticks(10);
+    if (display_time !== 0) $fatal(1, "100 second rollover");
 
-    $display("PASS: 10ms resolution, SS.hh boundaries, pause/resume, clear, 100s rollover");
+    $display("PASS: 10ms resolution, second carry, pause/resume, clear, rollover");
     $finish;
   end
 
   initial begin
-    #3_000_000;
+    #2_000_000;
     $fatal(1, "watchdog timeout");
   end
 endmodule

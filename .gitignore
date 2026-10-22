@@ -25,7 +25,5 @@
 .DS_Store
 Thumbs.db
 
-verification/*.rpt
-verification/*.log
-verification/*.jou
-verification/*.wdb
+# Reproducible simulation traces and verification reports
+/verification/

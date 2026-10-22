@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="950" viewBox="0 0 1600 950">
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#17324D"/></marker></defs>
+<rect width="1600" height="950" fill="white"/>
+<style>text {font-family:"Malgun Gothic","Segoe UI",sans-serif;fill:#17324D} .line{fill:none;stroke:#17324D;stroke-width:3;marker-end:url(#arrow);stroke-linejoin:round}</style>
+<text x="65" y="65" font-size="27" text-anchor="start" font-weight="700" style="fill:#17324D">FUNCTION BLOCK DIAGRAM</text>
+<text x="65" y="105" font-size="23" text-anchor="start" font-weight="400" style="fill:#50647A">top_minsec_stopwatch · 100 MHz 단일 클럭</text>
+<rect x="170" y="145" width="300" height="135" rx="18" fill="#F1F5FA" stroke="#17324D" stroke-width="3"/>
+<text x="320.0" y="189" font-size="24" text-anchor="middle" font-weight="700" style="fill:#17324D">reset_synchronizer</text>
+<text x="320.0" y="227" font-size="21" text-anchor="middle" font-weight="400" style="fill:#50647A">비동기 인가 / 동기 해제</text>
+<rect x="560" y="145" width="280" height="135" rx="18" fill="#F1F5FA" stroke="#17324D" stroke-width="3"/>
+<text x="700.0" y="189" font-size="24" text-anchor="middle" font-weight="700" style="fill:#17324D">tick_generator</text>
+<text x="700.0" y="227" font-size="21" text-anchor="middle" font-weight="400" style="fill:#50647A">100 MHz → 1 ms tick</text>
+<text x="100" y="213" font-size="23" text-anchor="middle" font-weight="700" style="fill:#17324D">reset</text>
+<path class="line" d="M140 205 H170"/>
+<text x="520" y="213" font-size="23" text-anchor="middle" font-weight="700" style="fill:#17324D">clk</text>
+<path class="line" d="M545 205 H560"/>
+<text x="900" y="185" font-size="21" text-anchor="start" font-weight="400" style="fill:#17324D">clk와 동기 해제된 reset은 모든 모듈에 공유</text>
+<text x="900" y="225" font-size="21" text-anchor="start" font-weight="400" style="fill:#17324D">1 ms tick: 시간 계수 / 자리 스캔 / 무입력 타이머</text>
+<text x="900" y="263" font-size="19" text-anchor="start" font-weight="400" style="fill:#50647A">가독성을 위해 공통 제어 배선 일부 생략</text>
+<rect x="150" y="380" width="260" height="150" rx="18" fill="#F1F5FA" stroke="#17324D" stroke-width="3"/>
+<text x="280.0" y="424" font-size="24" text-anchor="middle" font-weight="700" style="fill:#17324D">btn_debouncer × 3</text>
+<text x="280.0" y="462" font-size="21" text-anchor="middle" font-weight="400" style="fill:#50647A">2FF 동기화</text>
+<text x="280.0" y="494" font-size="21" text-anchor="middle" font-weight="400" style="fill:#50647A">10 ms 연속 안정 확인</text>
+<rect x="480" y="380" width="220" height="150" rx="18" fill="#F1F5FA" stroke="#17324D" stroke-width="3"/>
+<text x="590.0" y="424" font-size="24" text-anchor="middle" font-weight="700" style="fill:#17324D">상승 에지 검출</text>
+<text x="590.0" y="462" font-size="21" text-anchor="middle" font-weight="400" style="fill:#50647A">clean_btn &amp; ~prev</text>
+<text x="590.0" y="494" font-size="21" text-anchor="middle" font-weight="400" style="fill:#50647A">버튼당 1회 펄스</text>
+<rect x="770" y="380" width="300" height="150" rx="18" fill="#E9F6F4" stroke="#17324D" stroke-width="3"/>
+<text x="920.0" y="424" font-size="24" text-anchor="middle" font-weight="700" style="fill:#17324D">minsec_stopwatch</text>
+<text x="920.0" y="462" font-size="21" text-anchor="middle" font-weight="400" style="fill:#50647A">모드 FSM</text>
+<text x="920.0" y="494" font-size="21" text-anchor="middle" font-weight="400" style="fill:#50647A">분초 / 스톱워치 카운터</text>
+<rect x="1150" y="380" width="300" height="150" rx="18" fill="#F1F5FA" stroke="#17324D" stroke-width="3"/>
+<text x="1300.0" y="424" font-size="24" text-anchor="middle" font-weight="700" style="fill:#17324D">fnd_controller</text>
+<text x="1300.0" y="462" font-size="21" text-anchor="middle" font-weight="400" style="fill:#50647A">BCD 변환 + 숫자 디코딩</text>
+<text x="1300.0" y="494" font-size="21" text-anchor="middle" font-weight="400" style="fill:#50647A">4자리 1 ms 순환 선택</text>
+<text x="75" y="455" font-size="21" text-anchor="middle" font-weight="700" style="fill:#17324D">btn[2:0]</text>
+<path class="line" d="M10 470 H150"/>
+<path class="line" d="M410 455 H480"/>
+<path class="line" d="M700 455 H770"/>
+<text x="735" y="357" font-size="18" text-anchor="middle" font-weight="400" style="fill:#17324D">btn_pulse</text>
+<path class="line" d="M1070 440 H1150"/>
+<text x="1110" y="357" font-size="18" text-anchor="middle" font-weight="400" style="fill:#17324D">data + dot</text>
+<path class="line" d="M1450 430 H1560"/>
+<text x="1510" y="401" font-size="21" text-anchor="middle" font-weight="700" style="fill:#17324D">an[3:0]</text>
+<path class="line" d="M920 380 V320 H1550"/>
+<text x="1460" y="308" font-size="21" text-anchor="middle" font-weight="700" style="fill:#17324D">led[15:0]</text>
+<rect x="470" y="695" width="240" height="115" rx="18" fill="#F1F5FA" stroke="#17324D" stroke-width="3"/>
+<text x="590.0" y="739" font-size="24" text-anchor="middle" font-weight="700" style="fill:#17324D">OR: |w_clean_btn</text>
+<text x="590.0" y="777" font-size="21" text-anchor="middle" font-weight="400" style="fill:#50647A">하나라도 누르면 1</text>
+<rect x="850" y="675" width="340" height="150" rx="18" fill="#E9F6F4" stroke="#17324D" stroke-width="3"/>
+<text x="1020.0" y="719" font-size="24" text-anchor="middle" font-weight="700" style="fill:#17324D">fnd_idle_animation</text>
+<text x="1020.0" y="757" font-size="21" text-anchor="middle" font-weight="400" style="fill:#50647A">Pause + 5초 무입력</text>
+<text x="1020.0" y="789" font-size="21" text-anchor="middle" font-weight="400" style="fill:#50647A">100 ms마다 a → f 회전</text>
+<rect x="1370" y="690" width="150" height="115" rx="18" fill="#F1F5FA" stroke="#17324D" stroke-width="3"/>
+<text x="1445.0" y="734" font-size="24" text-anchor="middle" font-weight="700" style="fill:#17324D">MUX</text>
+<text x="1445.0" y="772" font-size="21" text-anchor="middle" font-weight="400" style="fill:#50647A">시간 / 회전</text>
+<path class="line" d="M440 455 V750 H470"/>
+<text x="410" y="625" font-size="19" text-anchor="end" font-weight="400" style="fill:#17324D">clean_btn[2:0]</text>
+<path class="line" d="M710 750 H850"/>
+<text x="780" y="729" font-size="18" text-anchor="middle" font-weight="400" style="fill:#17324D">button_active</text>
+<path class="line" d="M930 530 V600 H1020 V675"/>
+<text x="1000" y="582" font-size="20" text-anchor="middle" font-weight="400" style="fill:#17324D">paused</text>
+<path class="line" d="M1300 530 V610 H1445 V690"/>
+<text x="1395" y="594" font-size="20" text-anchor="middle" font-weight="400" style="fill:#17324D">time_seg</text>
+<path class="line" d="M1190 750 H1370"/>
+<text x="1280" y="729" font-size="18" text-anchor="middle" font-weight="400" style="fill:#17324D">animation_seg</text>
+<path class="line" d="M1190 795 H1280 V855 H1445 V805"/>
+<text x="1360" y="884" font-size="19" text-anchor="middle" font-weight="400" style="fill:#17324D">active (선택)</text>
+<path class="line" d="M1520 750 H1575"/>
+<text x="1510" y="671" font-size="21" text-anchor="middle" font-weight="700" style="fill:#17324D">seg[7:0]</text>
+</svg>

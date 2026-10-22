@@ -35,6 +35,10 @@
 - **기능 분리**: 모드 FSM, 독립 시간 카운터, FND 표시 및 애니메이션 모듈
 - **리셋**: 비동기 인가와 동기 해제
 
+![Vivado RTL 회로도](docs/assets/function_block_diagram.png)
+
+Vivado RTL Analysis에서 생성한 회로도입니다.
+
 [RTL 소스](fpga_stopwatch.srcs/sources_1/new/) · [테스트벤치](fpga_stopwatch.srcs/sim_1/new/) · [Basys3 핀 제약](fpga_stopwatch.srcs/constrs_1/new/basys3.xdc)
 
 ## 실행 및 검증

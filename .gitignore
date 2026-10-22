@@ -27,6 +27,3 @@ Thumbs.db
 
 # Reproducible simulation traces and verification reports
 /verification/
-
-# Source screenshots awaiting a final replacement
-/docs/assets/pending/

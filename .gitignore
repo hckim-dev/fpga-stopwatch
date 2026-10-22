@@ -1,0 +1,31 @@
+# Vivado project and run products
+*.cache/
+*.runs/
+*.sim/
+*.hw/
+*.ip_user_files/
+*.gen/
+.Xil/
+
+# Tool-generated logs and waveforms
+*.jou
+*.log
+*.str
+*.wdb
+*.pb
+*.rpt
+*.rpx
+*.dcp
+*.bit
+*.ltx
+
+# Editor/OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+verification/*.rpt
+verification/*.log
+verification/*.jou
+verification/*.wdb

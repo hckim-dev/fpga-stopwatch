@@ -5,9 +5,9 @@
 4자리 7-Segment에 분초 시계와 10 ms 해상도 스톱워치를 구현한 FPGA 학습 프로젝트입니다.
 버튼 입력 처리부터 모드 FSM, 시간 계수, 화면 스캔까지 RTL 모듈로 구성했습니다.
 
-[▶ 25초 보드 시연](docs/assets/demo.mp4) · [FSM 및 테스트 분석](docs/verification.md)
+[FSM 및 테스트 분석](docs/verification.md)
 
-<a href="docs/assets/demo.mp4"><img src="docs/assets/demo_preview.jpg" width="220" alt="Basys3 스톱워치 시연 영상"></a>
+https://github.com/user-attachments/assets/57d4900e-5d9d-4e3d-b95e-5d7ff6966092
 
 ## 주요 동작
 
